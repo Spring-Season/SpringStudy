@@ -19,6 +19,7 @@ public class BoardController {
     @GetMapping("/")
     public String list(Model model) {
         List<BoardDto> boardDtoList = boardService.getBoardList();
+        //boardService.saveFile(boardDtoList);
         model.addAttribute("boardList", boardDtoList);
         return "board/list.html";
     }
