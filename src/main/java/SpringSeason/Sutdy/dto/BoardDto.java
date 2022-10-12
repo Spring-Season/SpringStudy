@@ -3,6 +3,7 @@ package SpringSeason.Sutdy.dto;
 import SpringSeason.Sutdy.domain.Board;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 public class BoardDto {
     private Long id;
 
+    @NotEmpty(message = "author must not be null")
     private String author;
 
     private String title;

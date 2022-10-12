@@ -4,9 +4,12 @@ import SpringSeason.Sutdy.dto.BoardDto;
 import SpringSeason.Sutdy.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -19,7 +22,6 @@ public class BoardController {
     @GetMapping("/")
     public String list(Model model) {
         List<BoardDto> boardDtoList = boardService.getBoardList();
-        //boardService.saveFile(boardDtoList);
         model.addAttribute("boardList", boardDtoList);
         return "board/list.html";
     }
@@ -30,7 +32,7 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public String save(BoardDto boardDto) {
+    public String save(BoardDto boardDto, Model model) {
         boardService.save(boardDto);
         return "redirect:/";
     }
@@ -49,6 +51,7 @@ public class BoardController {
     @GetMapping("/board/update/{id}")
     public String update(@PathVariable("id") Long id, Model model) {
         BoardDto boardDto = boardService.getBoard(id);
+        System.out.println("boardDto = " + boardDto);
         model.addAttribute("board", boardDto);
         return "board/edit.html";
     }
